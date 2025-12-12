@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <title>Example of DOM with JS</title>
+</head>
+<body>
+    <h1 id="h1d1">This is first heading</h1>
+    <h2 id="h2d2">This is second heading</h2>
+    <h3 id="h3d3">This is Third heading</h3>
+    <button onclick="fun()">click</button>
+    <button onclick="fun2()">click2</button>
+    <button id="b1d1">Click3</button>
+    <script>
+        function fun()
+        {
+            document.getElementById("h1d1").innerHTML="Heading 1 changed by JS!"
+        }
+        function fun2()
+        {
+            document.getElementById("h2d2").innerHTML="Heading 2 changed by JS!"
+        }
+        
+    </script>
+</body>
+</html>
