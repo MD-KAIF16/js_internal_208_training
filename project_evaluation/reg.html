@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Student Registration Form</title>
+
+<style>
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+body {
+    height: 100vh;
+    background: #050b0f;
+    color: white;
+    overflow: hidden;
+}
+
+/* MOVING BLOBS */
+.blob {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle at 30% 30%, #1db954, transparent 60%);
+    filter: blur(120px);
+    animation: float 18s infinite alternate;
+}
+
+.blob2 {
+    top: 50%;
+    left: 60%;
+    animation-delay: 5s;
+}
+
+@keyframes float {
+    from {
+        transform: translate(0, 0);
+    }
+    to {
+        transform: translate(120px, -100px);
+    }
+}
+
+/* NAVBAR */
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    padding: 15px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #cfd8dc;
+    padding: 6px 14px;
+    border-radius: 20px;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    background: rgba(29,185,84,0.2);
+    color: #1db954;
+}
+
+/* MAIN CARD */
+.container {
+    position: relative;
+    width: 480px;
+    margin: 40px auto;
+    padding: 30px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 16px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 0 30px rgba(0,0,0,0.6);
+    z-index: 2;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-top: 12px;
+    font-size: 14px;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #555;
+    color: white;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: #1db954;
+}
+
+.gender input {
+    width: auto;
+}
+
+button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #1db954;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #17a74a;
+}
+
+.error {
+    color: #ff6b6b;
+    margin-top: 12px;
+}
+
+.success {
+    color: #1db954;
+    margin-top: 15px;
+    font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="blob"></div>
+<div class="blob blob2"></div>
+
+<nav>
+    <a href="#">Home</a>
+    <a href="#">Assessment</a>
+    <a href="#">Guidelines</a>
+    <a href="#">Support</a>
+</nav>
+
+<div class="container">
+    <h2>Student Registration Form</h2>
+
+    <form id="regForm">
+
+        <label>Name</label>
+        <input type="text" id="name">
+
+        <label>Email</label>
+        <input type="email" id="email">
+
+        <label>Gender</label>
+        <div class="gender">
+            <input type="radio" name="gender" value="Male"> Male
+            <input type="radio" name="gender" value="Female"> Female
+        </div>
+
+        <label>Course</label>
+        <select id="course">
+            <option value="">Select Course</option>
+            <option>JavaScript</option>
+            <option>Python</option>
+            <option>Java</option>
+        </select>
+
+        <label>
+            <input type="checkbox" id="terms">
+            Terms & Conditions
+        </label>
+
+        <button type="submit">Submit</button>
+
+        <div id="output"></div>
+    </form>
+</div>
+
+<script>
+document.getElementById("regForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    let name = document.getElementById("name").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let course = document.getElementById("course").value;
+    let terms = document.getElementById("terms").checked;
+    let gender = document.querySelector('input[name="gender"]:checked');
+
+    let output = document.getElementById("output");
+    output.innerHTML = "";
+
+    if (name === "") {
+        output.innerHTML = "<p class='error'>Name should not be empty</p>";
+        return;
+    }
+
+    if (!email.includes("@")) {
+        output.innerHTML = "<p class='error'>Email should be valid</p>";
+        return;
+    }
+
+    if (!gender) {
+        output.innerHTML = "<p class='error'>Gender must be selected</p>";
+        return;
+    }
+
+    if (course === "") {
+        output.innerHTML = "<p class='error'>Course must be selected</p>";
+        return;
+    }
+
+    if (!terms) {
+        output.innerHTML = "<p class='error'>Terms checkbox must be checked</p>";
+        return;
+    }
+
+    output.innerHTML = `
+        <p class="success">Registration Successful!</p>
+        Name: ${name}<br>
+        Email: ${email}<br>
+        Gender: ${gender.value}<br>
+        Course: ${course}
+    `;
+});
+</script>
+
+</body>
+</html>

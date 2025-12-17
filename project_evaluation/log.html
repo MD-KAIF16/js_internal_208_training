@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login Successful</title>
+
+<style>
+/* RESET */
+*{
+    box-sizing:border-box;
+    font-family:"Segoe UI", Arial, sans-serif;
+}
+
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#050b0f;
+    color:#e0e0e0;
+    overflow:hidden;
+}
+
+/* BLOBS */
+.blob{
+    position:absolute;
+    width:420px;
+    height:420px;
+    background:radial-gradient(circle at 30% 30%, #1db954, transparent 70%);
+    filter:blur(150px);
+    animation:float 25s infinite alternate ease-in-out;
+    opacity:0.6;
+}
+.blob.two{
+    top:55%;
+    left:60%;
+    animation-delay:6s;
+}
+
+@keyframes float{
+    0%{transform:translate(0,0)}
+    50%{transform:translate(120px,-80px)}
+    100%{transform:translate(-80px,60px)}
+}
+
+/* SUCCESS BOX */
+.success-box{
+    background:rgba(0,0,0,0.6);
+    padding:45px;
+    border-radius:16px;
+    text-align:center;
+    backdrop-filter:blur(14px);
+    box-shadow:0 0 30px rgba(0,0,0,0.7);
+    border:1px solid rgba(29,185,84,0.2);
+    position:relative;
+    z-index:2;
+    transition:all 0.4s ease;
+}
+
+.success-box:hover{
+    transform:translateY(-6px);
+    box-shadow:0 0 40px rgba(29,185,84,0.35);
+}
+
+/* TEXT */
+h1{
+    color:#1db954;
+    margin-bottom:18px;
+}
+
+p{
+    font-size:16px;
+    margin:10px 0;
+}
+
+/* LINK BUTTON */
+a{
+    display:inline-block;
+    margin-top:22px;
+    padding:10px 26px;
+    text-decoration:none;
+    background:#1db954;
+    color:black;
+    border-radius:10px;
+    font-weight:bold;
+    transition:all 0.3s ease;
+}
+
+a:hover{
+    background:#17a74a;
+    transform:translateY(-2px);
+    box-shadow:0 0 15px rgba(29,185,84,0.6);
+}
+</style>
+</head>
+
+<body>
+
+<!-- BACKGROUND EFFECT -->
+<div class="blob"></div>
+<div class="blob two"></div>
+
+<div class="success-box">
+    <h1>Login Successful 🎉</h1>
+
+    <p id="user"></p>
+    <p id="pass"></p>
+
+    <p>You have logged in successfully.</p>
+
+    <a href="index.html">Go to Home</a>
+</div>
+
+<script>
+    let params = new URLSearchParams(window.location.search);
+
+    let username = params.get("name");
+    let password = params.get("pswd");
+
+    document.getElementById("user").innerHTML =
+        "Your Username is: <b>" + username + "</b>";
+
+    document.getElementById("pass").innerHTML =
+        "Your Password is: <b>" + password + "</b>";
+</script>
+
+</body>
+</html>
